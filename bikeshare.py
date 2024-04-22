@@ -1,6 +1,7 @@
 import time
 import pandas as pd
 import numpy as np
+import datetime as dt
 
 CITY_DATA = {'chicago': 'chicago.csv',
              'new york city': 'new_york_city.csv',
@@ -55,7 +56,7 @@ def load_data(city, month, day):
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    df['day_of_week'] = df['Start Time'].dt.weekday
     df['hour'] = df['Start Time'].dt.hour
 
     if month != 'all':
