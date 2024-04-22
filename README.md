@@ -5,7 +5,7 @@
 ## Overview
 
 In this project, the student had to make use of **Python** to explore data related to 
-bike share systems for two major cities in the _United States — Chicago and Washington_.
+bike share systems for two major cities in the _**United States** — Chicago and Washington_.
 The student had to write code to
 - import the data and answer interesting questions about it by computing descriptive statistics, and 
 - write a script that takes in raw input to create an interactive experience in the terminal to present these statistics.
@@ -21,3 +21,12 @@ Install below packages if not in the default python environment setup
 ``pip install pandas``
 
 ``pip install numpy``
+
+## Execute
+
+``python bikeshare.py``
+
+## Crdeits
+
+- udacity - nanodegree program
+- [Dillinger](https://dillinger.io/) for markdown experience
