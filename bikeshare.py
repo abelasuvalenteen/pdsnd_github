@@ -6,7 +6,7 @@ CITY_DATA = {'chicago': 'chicago.csv',
              'new york city': 'new_york_city.csv',
              'washington': 'washington.csv'}
 month_data = {'all', 'january', 'february', 'march', 'april', 'may', 'june'}
-day_data = {'all', 'monday', 'tuesday', 'wednesday', 'friday', 'saturday', 'sunday'}
+day_data = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 
 def get_filters():
@@ -83,7 +83,7 @@ def time_stats(df):
 
     # TO DO: display the most common day of week
     common_day = df['day_of_week'].mode()[0]
-    print("the weekday most frequently used is:", common_day)
+    print("the weekday most frequently used is:", day_data[common_day])
 
     # TO DO: display the most common start hour
     start_hour = df['hour'].mode()[0]
