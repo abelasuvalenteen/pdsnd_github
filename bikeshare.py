@@ -1,13 +1,12 @@
 import time
+
 import pandas as pd
-import numpy as np
-import datetime as dt
 
 CITY_DATA = {'chicago': 'chicago.csv',
              'new york city': 'new_york_city.csv',
              'washington': 'washington.csv'}
 month_data = {'all', 'january', 'february', 'march', 'april', 'may', 'june'}
-day_data = {'all', 'monday', 'tuesday', 'wednesday', 'friday', 'saturday', 'sunday'}
+day_data = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 
 def get_filters():
@@ -19,8 +18,9 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    print('Hello! Let\'s explore some US bike share data!')
+    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid
+    # inputs
     city = input("Please enter a city name: ").lower()
     while city not in CITY_DATA:
         city = input("Oh sorry, Please choose from these three cities (chicago, new york city, washington): ").lower()
@@ -83,7 +83,7 @@ def time_stats(df):
 
     # TO DO: display the most common day of week
     common_day = df['day_of_week'].mode()[0]
-    print("the weekday most frequently used is:", common_day)
+    print("the weekday most frequently used is:", day_data[common_day])
 
     # TO DO: display the most common start hour
     start_hour = df['hour'].mode()[0]
@@ -135,7 +135,7 @@ def trip_duration_stats(df):
 
 
 def user_stats(df, city):
-    """Displays statistics on bikeshare users."""
+    """Displays statistics on bike share users."""
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
@@ -148,10 +148,10 @@ def user_stats(df, city):
         print('The user gender is:')
         print(df['Gender'].value_counts())
         # TO DO: Display earliest, most recent, and most common year of birth
-        earlist_date = df['Birth Year'].min()
+        earliest_date = df['Birth Year'].min()
         newest_date = df['Birth Year'].max()
         common_date = df['Birth Year'].mode()[0]
-        print('Earliest birth records are: {}\n'.format(int(earlist_date)))
+        print('Earliest birth records are: {}\n'.format(int(earliest_date)))
         print('Newest birth records are: {}\n'.format(int(newest_date)))
         print('Most common birth data are: {}\n'.format(int(common_date)))
 
@@ -165,7 +165,7 @@ def raw_data(df):
        """
     print("Enter to display row data, no to skip.")
     x = 0
-    while (input() != 'no'):
+    while input() != 'no':
         x = x + 5
         print(df[x:x + 5])
 
