@@ -1,6 +1,6 @@
 # Bikeshare Project
 
-[![Python|py](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4GSKovH6-EhYXjEGHsRxYldOWgg1-8xnw0O0zyobjvw&s)]
+![Python|py](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4GSKovH6-EhYXjEGHsRxYldOWgg1-8xnw0O0zyobjvw&s)
 
 ## Overview
 
@@ -16,6 +16,7 @@ The student had to write code to
     washington.csv
 ```
 ## Configure
+
 Install below packages if not in the default python environment setup
 
 ``pip install pandas``
@@ -26,7 +27,7 @@ Install below packages if not in the default python environment setup
 
 ``python bikeshare.py``
 
-## Crdeits
+## Credits
 
 - udacity - nanodegree program
 - [Dillinger](https://dillinger.io/) for markdown experience
