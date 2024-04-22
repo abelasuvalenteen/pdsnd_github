@@ -1,6 +1,6 @@
 import time
+
 import pandas as pd
-import numpy as np
 
 CITY_DATA = {'chicago': 'chicago.csv',
              'new york city': 'new_york_city.csv',
@@ -18,7 +18,7 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
+    print('Hello! Let\'s explore some US bike share data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input("Please enter a city name: ").lower()
     while city not in CITY_DATA:
@@ -134,7 +134,7 @@ def trip_duration_stats(df):
 
 
 def user_stats(df, city):
-    """Displays statistics on bikeshare users."""
+    """Displays statistics on bike share users."""
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
@@ -147,10 +147,10 @@ def user_stats(df, city):
         print('The user gender is:')
         print(df['Gender'].value_counts())
         # TO DO: Display earliest, most recent, and most common year of birth
-        earlist_date = df['Birth Year'].min()
+        earliest_date = df['Birth Year'].min()
         newest_date = df['Birth Year'].max()
         common_date = df['Birth Year'].mode()[0]
-        print('Earliest birth records are: {}\n'.format(int(earlist_date)))
+        print('Earliest birth records are: {}\n'.format(int(earliest_date)))
         print('Newest birth records are: {}\n'.format(int(newest_date)))
         print('Most common birth data are: {}\n'.format(int(common_date)))
 
