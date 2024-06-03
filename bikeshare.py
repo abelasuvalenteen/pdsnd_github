@@ -1,12 +1,30 @@
-import time
+'''
+Author : Public
+'''
 
+import time
+import logging
 import pandas as pd
 
 CITY_DATA = {'chicago': 'chicago.csv',
              'new york city': 'new_york_city.csv',
              'washington': 'washington.csv'}
 month_data = {'all', 'january', 'february', 'march', 'april', 'may', 'june'}
-day_data = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+day_data = [
+    'all',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday']
+
+logging.basicConfig(
+    filename='./results.log',
+    level=logging.INFO,
+    filemode='w',
+    format='%(name)s - %(levelname)s - %(message)s')
 
 
 def get_filters():
@@ -19,23 +37,30 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bike share data!')
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid
+    # TO DO: get user input for city (chicago, new york city, washington).
+    # HINT: Use a while loop to handle invalid
     # inputs
     city = input("Please enter a city name: ").lower()
     while city not in CITY_DATA:
-        city = input("Oh sorry, Please choose from these three cities (chicago, new york city, washington): ").lower()
+        city = input(
+            "Oh sorry, Please choose from these three cities "
+            "(chicago, new york city, washington): ").lower()
 
     # TO DO: get user input for month (all, january, february, ... , june)
-    month = input("Please select a month or choose all for all months: ").lower()
+    month = input(
+        "Please select a month or choose all for all months: ").lower()
     while month not in month_data:
-        month = input("Sorry, Please select a month between january and june or choose all for all months:").lower()
+        month = input(
+            "Sorry, Please select a month between january and june or "
+            "choose all for all months:").lower()
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     day = input("Please enter a day or choose all for all days: ").lower()
     while day not in day_data:
-        day = input("Sorry, Please choose a day of the week or choose all for all months:").lower()
+        day = input(
+            "Sorry, Please choose a day of the week or choose all for all months:").lower()
 
-    print('-' * 40)
+    logging.info('-' * 40)
     return city, month, day
 
 
@@ -74,89 +99,92 @@ def load_data(city, month, day):
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
-    print('\nCalculating The Most Frequent Times of Travel...\n')
+    logging.info('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
     # TO DO: display the most common month
     common_month = df['month'].mode()[0]
-    print("the recurring month is:", common_month)
+    logging.info("the recurring month is:", common_month)
 
     # TO DO: display the most common day of week
     common_day = df['day_of_week'].mode()[0]
-    print("the weekday most frequently used is:", day_data[common_day])
+    logging.info("the weekday most frequently used is:", day_data[common_day])
 
     # TO DO: display the most common start hour
     start_hour = df['hour'].mode()[0]
-    print("the most frequently start time is:", start_hour)
+    logging.info(f'the most frequently start time is: {start_hour}')
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-' * 40)
+    logging.info(f'\nThis took %s seconds. % {(time.time() - start_time)}')
+    logging.info('-' * 40)
 
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
-    print('\nCalculating The Most Popular Stations and Trip...\n')
+    logging.info('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
     # TO DO: display most commonly used start station
     start_station = df['Start Station'].mode()[0]
-    print("The most popular starting point is: ", start_station)
+    logging.info("The most popular starting point is: ", start_station)
 
     # TO DO: display most commonly used end station
     end_station = df['End Station'].mode()[0]
-    print("The most frequently end station: ", end_station)
+    logging.info("The most frequently end station: ", end_station)
 
-    # TO DO: display most frequent combination of start station and end station trip
+    # TO DO: display most frequent combination of start station and end
+    # station trip
     group_station = df.groupby(['Start Station', 'End Station'])
     start_end_station = group_station.size().sort_values(ascending=False).head(1)
-    print("The most common route between a start station and an end station: ", start_end_station)
+    logging.info(
+        "The most common route between a start station and an end station: ",
+        start_end_station)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-' * 40)
+    logging.info(f'This took %s seconds. % f{(time.time() - start_time)}')
+    logging.info('-' * 40)
 
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    print('\nCalculating Trip Duration...\n')
+    logging.info('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
     # TO DO: display total travel time
     total_duration = df['Trip Duration'].sum()
-    print("The total travel time is: " + str(round(total_duration)))
+    logging.info("The total travel time is: " + str(round(total_duration)))
 
     # TO DO: display mean travel time
     mean_duration = df['Trip Duration'].mean()
-    print("The mean travel time is: " + str(round(mean_duration)))
+    logging.info("The mean travel time is: " + str(round(mean_duration)))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-' * 40)
+    logging.info(f'\nThis took %s seconds. % {(time.time() - start_time)}')
+    logging.info('-' * 40)
 
 
 def user_stats(df, city):
     """Displays statistics on bike share users."""
 
-    print('\nCalculating User Stats...\n')
+    logging.info('\nCalculating User Stats...\n')
     start_time = time.time()
 
     # Display counts of user types
-    print('The user type is:')
-    print(df['User Type'].value_counts())
+    logging.info('The user type is:')
+    logging.info(df['User Type'].value_counts())
     if city != 'washington':
         # Display counts of gender
-        print('The user gender is:')
-        print(df['Gender'].value_counts())
+        logging.info('The user gender is:')
+        logging.info(df['Gender'].value_counts())
         # TO DO: Display earliest, most recent, and most common year of birth
         earliest_date = df['Birth Year'].min()
         newest_date = df['Birth Year'].max()
         common_date = df['Birth Year'].mode()[0]
-        print('Earliest birth records are: {}\n'.format(int(earliest_date)))
-        print('Newest birth records are: {}\n'.format(int(newest_date)))
-        print('Most common birth data are: {}\n'.format(int(common_date)))
+        logging.info(f'Earliest birth records are: {format(int(earliest_date))}\n')
+        logging.info(f'Newest birth records are: {format(int(newest_date))}\n')
+        logging.info(f'Most common birth data are: {format(int(common_date))}\n')
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-' * 40)
+    logging.info(f'This took %s seconds.% {(time.time() - start_time)}')
+    logging.info('-' * 40)
 
 
 def raw_data(df):
@@ -171,6 +199,10 @@ def raw_data(df):
 
 
 def main():
+    '''
+    main method
+    :return: nothing
+    '''
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
